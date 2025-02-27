@@ -3,124 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .calculator {
-            width: 250px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .display {
-            width: 100%;
-            height: 50px;
-            margin-bottom: 10px;
-            font-size: 1.5em;
-            text-align: right;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        button {
-            padding: 15px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background: #ddd;
-        }
-        button:active {
-            background: #bbb;
-        }
-        .operator {
-            background: #99ddfd;
-            color: white;
-        }
-        .clear {
-            background: #ff3b30;
-            color: white;
-        }
-        .equal {
-            background: #4cd964;
-            color: white;
-        }
-        .cancel {
-            background: #ff9500;
-            color: white;
-        }
-    </style>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="calculator">
-        <input type="text" class="display" id="display" disabled>
-        <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">AC</button>
-            <button class="cancel" onclick="cancelLast()">C</button>
-            <button class="operator" onclick="appendValue('%')">%</button>
-            <button class="operator" onclick="appendValue('.')">.</button>
-            <button class="operator" onclick="appendValue('/')">/</button>
-                  <button onclick="appendValue('9')">9</button>
+    <div class="form-container">
+        <h1>Registration Form</h1>
+        <form id="registration-form" onsubmit="return validateForm()">
+            <label for="username">First name:</label>
+            <input type="text" id="username" name="username" required>
+            <span id="username-error" class="error"></span>
             
-            <button onclick="appendValue('8')">8</button>
-      
-            <button onclick="appendValue('7')">7</button>
-            <button class="operator" onclick="appendValue('*')">*</button>
-            <button onclick="appendValue('6')">6</button>
+            <label for="username">Middle name:</label>
+            <input type="text" id="username" name="username" required>
+            <span id="username-error" class="error"></span>
+
+            <label for="username">Lastname:</label>
+            <input type="text" id="username" name="username" required>
+            <span id="username-error" class="error"></span>
             
-            <button onclick="appendValue('5')">5</button>
             
-            <button onclick="appendValue('4')">4</button>
-            <button class="operator" onclick="appendValue('-')">-</button> 
-            <button onclick="appendValue('3')">3</button>
-           
-            <button onclick="appendValue('2')">2</button>
-        
-            <button onclick="appendValue('1')">1</button>
-            <button class="operator" onclick="appendValue('+')">+</button>
-            <button onclick="appendValue('0')">0</button>
-           
-            <button onclick="appendValue('00')">00</button>
-            <button class="equal" onclick="calculateResult()">=</button>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <span id="dob-error" class="error"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span id="email-error" class="error"></span>
             
-        
-        </div>
+            <label for="contact">Mobile no:</label>
+            <input type="contact" id="contact" name="contact" required>
+            <span id="contact-error" class="error"></span>
+             
+            <label for="aadhaar">Aadhaar Number:</label>
+            <input type="text" id="aadhaar" name="aadhaar" required>
+            <span id="aadhaar-error" class="error"></span>
+
+           <label for="pancard">PAN Card Number:</label>
+            <input type="text" id="pancard" name="pancard" required>
+            <span id="pancard-error" class="error"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span id="password-error" class="error"></span>
+            
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <span id="confirm-password-error" class="error"></span>
+
+            <div class="mb-3">
+                <label for="marks" class="form-label">Marks in 6 Subjects</label>
+                
+                    
+                        <input type="number" class="form-control" id="subject1" name="subject1" placeholder="Subject 1" required>
+                   
+                        <input type="number" class="form-control" id="subject2" name="subject2" placeholder="Subject 2" required>
+                    
+                        <input type="number" class="form-control" id="subject3" name="subject3" placeholder="Subject 3" required>
+                
+                        <input type="number" class="form-control" id="subject4" name="subject4" placeholder="Subject 4" required>
+                   
+                        <input type="number" class="form-control" id="subject5" name="subject5" placeholder="Subject 5" required>
+                   
+                        <input type="number" class="form-control" id="subject6" name="subject6" placeholder="Subject 6" required>
+                  
+               
+                <small id="marksError" class="form-text text-danger"></small>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
     </div>
-    
-    <script>
-    function appendValue(value) {
-        document.getElementById("display").value += value;
-    }
-
-    function clearDisplay() {
-        document.getElementById("display").value = "";
-    }
-
-    function calculateResult() {
-        let expression = document.getElementById("display").value;
-        try {
-            let result = eval(expression);
-            document.getElementById("display").value = result;
-            console.log("Result:", result);
-            alert("Result: " + result);
-        } catch (error) {
-            alert("Invalid Expression");
-        }
-    }
-</script>
-
+<script src="index.js"></script>
+   
 </body>
 </html>
